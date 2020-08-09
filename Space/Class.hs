@@ -24,8 +24,6 @@ import Data.Data
 import Local
 
 
-deriving instance (Eq (f (g a)) ,Eq (g a)) => Eq (Compose f g a)
-deriving instance (Ord (f(g a)) ,Ord (g a)) => Ord (Compose f g a)
 
 class (Additive f,Applicative f,Metric f ,Traversable f,Distributive f) => R f where
     dimM :: f a -> Int
@@ -46,9 +44,6 @@ instance R V4 where
 instance (R x , R y) => R (x :|: y) where
     dimM (x  :|: y) = dimM x + dimM y
     
-
-instance (R x , R y) => Metric (Compose x y) where
-    dot (Compose x) (Compose k)= quadrance (liftA2 dot x k)
 
 instance (R x , R y) => Metric (x :|: y) where
     dot (x :|: y) (k :|: l) = dot x k + dot y l
@@ -80,8 +75,6 @@ instance Space V4 where
     (|-|) = (-)
 
 
-instance (Applicative f, Applicative g ) => Additive (Compose f g ) where
-    zero = pure 0
 
 instance (Space x,Space y) => Space (x :|: y) where
     dim (x :|: y) (l :|: k)  =   dim x l  + dim y k

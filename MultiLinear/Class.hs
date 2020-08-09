@@ -8,8 +8,8 @@ import Data.Distributive
 import Linear.V3
 
 class MultiLinear f where
-   (!*!) :: Fractional a => f a -> f a -> f a
-   transpose :: Fractional a=> f a -> f a
+   (!*!) :: Num a => f a -> f a -> f a
+   transpose :: Num a => f a -> f a
 
 
 r0 = rotation (V3 0.1 0.1 0.1)

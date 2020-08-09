@@ -10,7 +10,7 @@ import Control.Arrow
 import Data.Monoid
 import Data.Distributive
 
-import Foreign.FStorable
+-- import Foreign.FStorable
 import Linear.Vector
 import Local
 import Control.Lens.TH
@@ -67,10 +67,10 @@ instance (Distributive f,Distributive g) => Distributive (CartesianProduct f g) 
     distribute wp = (collect _cfst wp) :|: (collect _csnd wp) where
 
 
-instance (FStorable i , FStorable j) => FStorable (i :|: j) where
-    fsize  _ = fsize (undefined :: i a) + fsize (undefined :: j a)
-    fpoke ptr (x :|: y) = fpoke ptr x >> fpokeByteOff ptr (fsize x) y
-    fpeek ptr = liftM2 (:|:) (fpeek ptr) (fpeekByteOff ptr (fsize (undefined :: i a)))
+--instance (FStorable i , FStorable j) => FStorable (i :|: j) where
+--    fsize  _ = fsize (undefined :: i a) + fsize (undefined :: j a)
+--    fpoke ptr (x :|: y) = fpoke ptr x >> fpokeByteOff ptr (fsize x) y
+--    fpeek ptr = liftM2 (:|:) (fpeek ptr) (fpeekByteOff ptr (fsize (undefined :: i a)))
 
 
 

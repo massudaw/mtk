@@ -6,20 +6,25 @@
  FlexibleInstances,
  DeriveFunctor,
  GeneralizedNewtypeDeriving,
+ DerivingVia,
+ DerivingStrategies,
  DeriveDataTypeable,
  TypeFamilies
  #-}
 
 module Rotation.SO3 where
 
+
 import Data.Data
-import Linear.V3
+import Linear.V3 hiding (_yz,_xy,_zx)
 import Linear.V2
 import Linear.V1
 import Linear.Matrix
 --import MultiLinear.Class
 
 import Control.Lens
+import Data.Functor.Classes
+import Data.Functor.Compose
 import Control.Applicative
 import Local
 import As
@@ -34,6 +39,7 @@ type M3 a = V3 (V3 a)
     --show x = "SO3" ++ show (so3ToPhi x , so3ToTheta x, so3ToPsi x)
 
 newtype SO3 a = SO3 {unSO3 :: M3 a }deriving(Functor,Data,Typeable,Eq,Read,Show)
+                                    deriving Show1 via (Compose V3 V3 )
 
 
 angles m = V3 ( so3ToPhi m) (so3ToTheta m) (so3ToPsi m)

@@ -2,6 +2,7 @@
 module As where
 
 import Control.Lens
+import Data.Functor.Compose
 import Control.Lens.Getter
 import Control.Lens.Setter
 import Control.Lens.Combinators
@@ -45,21 +46,21 @@ class PLength  f where
 
 
 type G g f a = g ( f a)
-type M f a = f (f a)
+type M f a = f (f  a)
 
-alongIdentity :: Applicative f =>
-     (forall a . FLens g g f f a )
-     -> FLens (M g) (M g) (M f) (M f) a
-alongIdentity l = lens (getMatrix l ) (setMatrix l )
+--alongIdentity :: Applicative f =>
+--     (forall a . FLens g g f f a )
+--     -> FLens (M g) (M g) (M f) (M f) a
+--alongIdentity l = lens (getMatrix l ) (setMatrix l )
 
 alongMatrix  :: Applicative f =>
      (forall a . FLens g g f f a )
-     -> FLens (M g) (M g) (M f) (M f) a
+     -> (forall l . Functor l => (M f b -> l (M f b)) -> M g b -> l (M g b) )
 alongMatrix l = lens (getMatrix l ) (setMatrix l )
 
 alongState ::(Functor g ,Applicative f)=>
      (forall a . FLens g g f f a )
-     -> FLens (M g) (M g) (M g) (M f) a
+     -> (forall l . Functor l => (M g b -> l (M f b)) -> M g b -> l (M g b) )
 alongState l = lens id (setState l )
 
 alongState' ::
@@ -88,6 +89,7 @@ getMatrix  :: Functor f =>
      -> M g b
      -> M f b
 getMatrix l x = fmap (^. l) $  (x ^. l)
+
 setMatrix  :: Applicative f =>
      (forall a . FLens g g f f a )
      -> M g b

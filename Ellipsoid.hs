@@ -3,7 +3,6 @@ module Ellipsoid where
 import Linear.V3
 import Data.Functor.Compose
 import Control.Applicative
-import Vectorization
 import Data.Foldable hiding(product)
 import Space.SO3
 import Rotation.SO3

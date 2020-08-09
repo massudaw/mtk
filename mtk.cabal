@@ -15,6 +15,8 @@ build-type:          Simple
 cabal-version:       >=1.8
 
 library
-  exposed-modules:     Linear.Diagonal,Multiplicative.Class, Local, Kalman, CartesianProduct,  As, SemiProduct,  Ellipsoid, MultiLinear.Class,  Space.SE3, Space.SO2, Space.SO3, Space.Class, Exponential.SO2, Exponential.SO3, Exponential.Class, Scaling.S1, Solver.RungeKutta,   Rotation.SO2, Rotation.SO3, Rotation.Class  , Scaling.Time, Product,Vectorization.Instances
+  exposed-modules:     Linear.Diagonal,Multiplicative.Class, Local,
+      -- Kalman,
+      CartesianProduct,  As, SemiProduct,  Ellipsoid, MultiLinear.Class,  Space.SE3, Space.SO2, Space.SO3, Space.Class, Exponential.SO2, Exponential.SO3, Exponential.Class, Scaling.S1, Solver.RungeKutta,   Rotation.SO2, Rotation.SO3, Rotation.Class  , Scaling.Time, Product
   -- other-modules:       
-  build-depends:    base ==4.6.*,  distributive ==0.3.*, linear ==1.*, lens ==3.9.*, transformers ==0.3.*, bytestring ==0.10.*,  time ==1.4.*,  binary ==0.7.*,  storable-complex ==0.2.*,    array  , fstorable == 0.1.* , hmatrix
+  build-depends:    base >= 4.7,  distributive , linear , lens , transformers , bytestring ,  time ,  binary ,  storable-complex ,    array  ,  hmatrix

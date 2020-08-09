@@ -1,4 +1,4 @@
-{-# LANGUAGE FlexibleContexts , RankNTypes, TypeFamilies ,DeriveFunctor, TypeOperators ,TypeSynonymInstances#-}
+{-# LANGUAGE FlexibleContexts , ConstrainedClassMethods, RankNTypes, TypeFamilies ,DeriveFunctor, TypeOperators ,TypeSynonymInstances#-}
 module Exponential.Class where
 
 import Local
