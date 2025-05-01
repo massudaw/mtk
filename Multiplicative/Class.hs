@@ -1,7 +1,6 @@
 module Multiplicative.Class where
 
 import Data.Monoid
-import Data.FMonoid.Class
 
 
 class Multiplicative a where

@@ -17,7 +17,7 @@ import Control.Lens.TH
 import GHC.Generics
 
 
-data (f :|: g) a = (:|:) { _cfst :: ! (f a) , _csnd :: ! (g a)}deriving(Show,Read,Eq,Generic)
+data (f :|: g) a = (:|:) { _cfst ::  (f a) , _csnd ::  (g a)}deriving(Show,Read,Eq,Generic)
 
 infixr 7 :|:
 

@@ -1,4 +1,4 @@
-{-# LANGUAGE TypeFamilies ,DeriveGeneric,DeriveFunctor,TypeSynonymInstances,TypeOperators ,MultiParamTypeClasses #-}
+{-# LANGUAGE BangPatterns, TypeFamilies ,DeriveGeneric,DeriveFunctor,TypeSynonymInstances,TypeOperators ,MultiParamTypeClasses #-}
 module SemiProduct where
 
 import Local
@@ -60,6 +60,6 @@ instance (Group f , Group g,Action f g ) => Group (f :>: g) where
 
 type instance Local (f :>: g) = (Local f) :|: (Local g)
 
-data (f :>: g) a = (:>:) { _sfst :: ! (f a) , _ssnd ::  ! (g a) } deriving(Show,Functor,Read,Generic)
+data (f :>: g) a = (:>:) { _sfst ::  (f a) , _ssnd ::   (g a) } deriving(Show,Functor,Read,Generic)
 
 type SemiProduct = (:>:) 
