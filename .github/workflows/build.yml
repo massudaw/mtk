@@ -1,0 +1,62 @@
+name: Build
+
+on:
+  push:
+    branches: [ main, master, claude/* ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up GHC
+      uses: haskell-actions/setup@v2
+      with:
+        ghc-version: '9.4.7'
+        enable-stack: false
+        cabal-update: true
+
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y liblapack-dev libblas-dev
+
+    - name: Install Haskell dependencies
+      run: |
+        cabal update
+        cabal install --lib --only-dependencies
+
+    - name: Build project
+      run: |
+        cabal configure
+        cabal build --verbose=1
+
+    - name: Compile all modules
+      run: |
+        ghc -c Linear/Diagonal.hs
+        ghc -c Multiplicative/Class.hs
+        ghc -c Local.hs
+        ghc -c Data/FMonoid/Class.hs
+        ghc -c CartesianProduct.hs
+        ghc -c As.hs
+        ghc -c Rotation/SO2.hs
+        ghc -c Rotation/SO3.hs
+        ghc -c Rotation/Class.hs
+        ghc -c SemiProduct.hs
+        ghc -c Space/Class.hs
+        ghc -c Exponential/Class.hs
+        ghc -c Exponential/SO2.hs
+        ghc -c Exponential/SO3.hs
+        ghc -c MultiLinear/Class.hs
+        ghc -c Space/SO2.hs
+        ghc -c Space/SO3.hs
+        ghc -c Ellipsoid.hs
+        ghc -c Space/SE3.hs
+        ghc -c Scaling/S1.hs
+        ghc -c Scaling/Time.hs
+        ghc -c Solver/RungeKutta.hs
+        ghc -c Product.hs
