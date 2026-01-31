@@ -21,28 +21,12 @@ jobs:
         sudo apt-get install -y libghc-distributive-dev libghc-linear-dev libghc-lens-dev
         sudo apt-get install -y libghc-hmatrix-dev libghc-storable-complex-dev
 
-    - name: Compile all modules
+    - name: Verify package installation
       run: |
-        ghc -c Linear/Diagonal.hs
-        ghc -c Multiplicative/Class.hs
-        ghc -c Local.hs
-        ghc -c Data/FMonoid/Class.hs
-        ghc -c CartesianProduct.hs
-        ghc -c As.hs
-        ghc -c Rotation/SO2.hs
-        ghc -c Rotation/SO3.hs
-        ghc -c Rotation/Class.hs
-        ghc -c SemiProduct.hs
-        ghc -c Space/Class.hs
-        ghc -c Exponential/Class.hs
-        ghc -c Exponential/SO2.hs
-        ghc -c Exponential/SO3.hs
-        ghc -c MultiLinear/Class.hs
-        ghc -c Space/SO2.hs
-        ghc -c Space/SO3.hs
-        ghc -c Ellipsoid.hs
-        ghc -c Space/SE3.hs
-        ghc -c Scaling/S1.hs
-        ghc -c Scaling/Time.hs
-        ghc -c Solver/RungeKutta.hs
-        ghc -c Product.hs
+        echo "Checking installed Haskell packages..."
+        ghc-pkg list
+
+    - name: Build project
+      run: |
+        chmod +x build.sh
+        ./build.sh
