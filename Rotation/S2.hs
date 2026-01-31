@@ -17,6 +17,7 @@ import Control.Lens
 import Linear.V3
 import Linear.V2
 import Linear.Metric
+import Linear.Epsilon
 import Local
 
 -- S2 represents points on the unit sphere in R^3
@@ -28,7 +29,7 @@ newtype S2 a = S2 {unS2 :: V3 a} deriving(Functor, Data, Typeable, Eq, Show, Rea
 type instance Local S2 = V3
 
 -- Create an S2 from a V3 by normalizing it
-mkS2 :: (Floating a, Eq a) => V3 a -> S2 a
+mkS2 :: (Floating a, Epsilon a) => V3 a -> S2 a
 mkS2 v = S2 $ normalize v
 
 -- North pole of the sphere
